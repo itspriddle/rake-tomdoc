@@ -36,7 +36,7 @@ require 'rake-tomdoc'
 When you are ready to publish new documentation:
 
 ```
-$ rake tomdoc
+$ rake tomdoc [--trace]
 $ git commit -am "Updating documentation"
 $ git push origin gh-pages
 $ git checkout -
