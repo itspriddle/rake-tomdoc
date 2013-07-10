@@ -1,7 +1,8 @@
 desc "Generates TomDoc using `yard`, and copies it to the `gh-pages` branch."
 task :tomdoc do
   runner = Proc.new do |command, error|
-    %x{#{command}}
+    output = %x{#{command}}
+    puts "+ #{command.strip}", output if Rake.application.options.trace
     abort error unless $?.success?
   end
 
