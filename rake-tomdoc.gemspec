@@ -10,5 +10,5 @@ Gem::Specification.new do |s|
   s.files      = %w[ Rakefile README.markdown lib/rake-tomdoc.rb ]
 
   s.add_dependency "rake"
-  s.add_dependency "yard-tomdoc"
+  s.add_dependency "yard-tomdoc", "~> 0.7.1"
 end
