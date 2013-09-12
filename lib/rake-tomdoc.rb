@@ -1,27 +1,37 @@
 desc "Generates TomDoc using `yard`, and copies it to the `gh-pages` branch."
 task :tomdoc do
-  runner = Proc.new do |command, error|
-    output = %x{#{command}}
-    puts "+ #{command.strip}", output if Rake.application.options.trace
+  def cmd(*args)
+    error   = args.pop
+    command = args.map(&:strip).join(' && ')
+    output  = `#{command}`
+    puts "+ #{command}", output if Rake.application.options.trace
     abort error unless $?.success?
   end
 
-  runner.call "which git",  "Couldn't find `git`!"
-  runner.call "which yard", "Couldn't find `yard`!"
+  def executor
+    cmd "which git",  "Couldn't find `git`!"
+    cmd "which yard", "Couldn't find `yard`!"
 
-  runner.call %{
-    git diff-files --quiet --ignore-submodules -- && \
-      git diff-index --cached --quiet HEAD --ignore-submodules --
-  }, "You must be on a clean branch to run this command"
+    cmd "git diff-files --quiet --ignore-submodules --",
+      "git diff-index --cached --quiet HEAD --ignore-submodules --",
+      "You must be on a clean branch to run this command"
 
-  puts "Generating docs"
+    puts "Generating docs"
 
-  Dir.mktmpdir do |dir|
-    runner.call "yard doc -o #{dir}",    "Couldn't generate docs!"
-    runner.call "git clean -fdx",        "Couldn't clean git index!"
-    runner.call "git checkout gh-pages", "Couldn't checkout gh-pages branch!"
-    runner.call "cp -r #{dir}/* .",      "Couldn't copy docs!"
+    Dir.mktmpdir do |dir|
+      cmd "yard doc --private --plugin tomdoc --output-dir #{dir} - LICENSE",
+        "Couldn't generate docs!"
+
+      cmd "git checkout gh-pages", "Couldn't checkout gh-pages branch!"
+      cmd "cp -rv #{dir}/* .",     "Couldn't copy docs!"
+    end
+
+    puts "Done! Make sure to review the changes and push to GitHub!"
   end
 
-  puts "Done! Make sure to review the changes and push to GitHub!"
+  if defined?(Bundler)
+    Bundler.with_clean_env(&method(:executor))
+  else
+    executor
+  end
 end
