@@ -12,4 +12,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rake"
   s.add_dependency "yard-tomdoc", "~> 0.7.1"
+  s.add_dependency "redcarpet",   "~> 3.1.1"
 end
