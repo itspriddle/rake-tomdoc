@@ -19,7 +19,8 @@ task :tomdoc do
     puts "Generating docs"
 
     Dir.mktmpdir do |dir|
-      cmd "yard doc --private --plugin tomdoc --output-dir #{dir} - LICENSE",
+      cmd "bundle exec yard doc --private --plugin tomdoc " <<
+        "--output-dir #{dir} - LICENSE",
         "Couldn't generate docs!"
 
       cmd "git checkout gh-pages", "Couldn't checkout gh-pages branch!"
