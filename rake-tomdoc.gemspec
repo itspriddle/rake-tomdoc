@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.platform   = Gem::Platform::RUBY
   s.name       = "rake-tomdoc"
-  s.version    = "0.0.2"
+  s.version    = "0.0.3"
   s.summary    = "rake-tomdoc"
   s.homepage   = "https://github.com/site5/rake-tomdoc"
   s.authors    = ["Joshua Priddle", "Justin Mazzi"]
