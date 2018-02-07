@@ -18,6 +18,8 @@ task :tomdoc do
 
     puts "Generating docs"
 
+    require "tmpdir"
+
     Dir.mktmpdir do |dir|
       cmd "bundle exec yard doc --private --plugin tomdoc " <<
         "--output-dir #{dir} - LICENSE",
