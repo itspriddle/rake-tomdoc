@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.summary    = "rake-tomdoc"
   s.homepage   = "https://github.com/itspriddle/rake-tomdoc"
   s.authors    = ["Joshua Priddle", "Justin Mazzi"]
-  s.email      = ["jpriddle@me.com", "jmazzi@site5.com"]
+  s.email      = ["jpriddle@me.com", "jmazzi@gmail.com"]
   s.license    = "MIT"
 
   s.files      = %w[ Rakefile README.markdown lib/rake-tomdoc.rb ]

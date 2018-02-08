@@ -51,4 +51,4 @@ $ git checkout -
 
 ## Copyright
 
-Copyright (c) 2013 Site5.com. See LICENSE for details.
+Copyright (c) 2018 Joshua Priddle. See LICENSE for details.
